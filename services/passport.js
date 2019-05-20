@@ -20,10 +20,11 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: '/auth/google/callback',
+      callbackURL: keys.googleRedirectURL,
       proxy: true
     },
     (accessToken, refreshToken, profile, done) => {
+      console.log("This is the Resource Token", accessToken)
       User.findOne({ googleId: profile.id }).then(existingUser => {
         if (existingUser) {
           console.log('We have a user We are done');
