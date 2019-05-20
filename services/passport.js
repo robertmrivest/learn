@@ -20,7 +20,7 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: 'localhost:5000/auth/google/callback'
+      callbackURL: 'https://still-eyrie-65376.herokuapp.com/auth/google/callback'
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOne({ googleId: profile.id }).then(existingUser => {
@@ -42,10 +42,6 @@ passport.use(
             });
         }
       });
-
-      console.log('Access Token', accessToken);
-      console.log('refresh Token', refreshToken);
-      console.log('Profile', profile.id);
     }
   )
 );
