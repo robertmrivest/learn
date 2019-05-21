@@ -10,6 +10,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
+  console.log("This is the ID",id)
   User.findById(id).then(user => {
     done(null, user);
   });
@@ -20,7 +21,7 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: keys.googleRedirectURL,
+      callbackURL: '/auth/google/callback',
       proxy: true
     },
     (accessToken, refreshToken, profile, done) => {
